@@ -8,13 +8,12 @@ import { EASE } from "@/lib/animations";
 
 const nodes = [
   { label: "User", sub: "Intent & prompt" },
-  { label: "Router", sub: "Model + tier selection" },
-  { label: "TMAP", sub: "Task decomposition" },
-  { label: "Agent Team", sub: "Parallel specialists" },
-  { label: "Voting Engine", sub: "Confidence ranking" },
-  { label: "RAA", sub: "Context grounding" },
-  { label: "Memory", sub: "Long-term recall" },
-  { label: "Final Response", sub: "Synthesized output", accent: true },
+  { label: "Orchestrator", sub: "Mode (fast / balanced / deep) + cost optimizer" },
+  { label: "RAA", sub: "Requirements gathered & brief locked" },
+  { label: "TMAP v2", sub: "Planner → Coder → Reviewer" },
+  { label: "DARS", sub: "Provider failover & health routing" },
+  { label: "Memory", sub: "Cross-session recall (Supabase)" },
+  { label: "Final Response", sub: "Synthesized, reviewed output", accent: true },
 ];
 
 export function Architecture() {

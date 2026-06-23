@@ -15,28 +15,28 @@ type Tech = {
 const technologies: Tech[] = [
   {
     name: "TMAP v2",
-    tag: "Core",
+    tag: "Core engine",
     description:
-      "Task-mapped agent planning. Decomposes any request into a parallel execution DAG with capability-matched agents.",
+      "The multi-agent build engine. A Planner breaks the task into a plan, Coder agents implement it, and a Reviewer critiques — looping until the output meets the quality bar.",
     span: true,
   },
   {
     name: "RAA",
-    tag: "Retrieval",
+    tag: "Requirements",
     description:
-      "Retrieval-Augmented Agents ground every answer in real context before reasoning begins.",
+      "The Requirements Architect Agent thinks WITH you — contributing ideas and trade-offs, then locking a clear brief before a single line of code is written.",
   },
   {
     name: "Orchestrator",
     tag: "Engine",
     description:
-      "Probabilistic fast / balanced / deep modes with a built-in cost optimizer routing each task to the right tier.",
+      "Fast / balanced / deep modes with a built-in cost optimizer routing each task to the right depth and model tier.",
   },
   {
     name: "Memory System",
     tag: "Context",
     description:
-      "Ranked retrieval blends importance, recency decay, and lexical fit for true long-term context.",
+      "Cross-session memory persisted in Supabase keeps Titan and TMAP grounded in everything that came before.",
   },
   {
     name: "Multi-Agent Workflow",
@@ -45,16 +45,16 @@ const technologies: Tech[] = [
       "Bounded-parallel execution with per-node retry, timeout, fallback, and re-run-from-failure.",
   },
   {
-    name: "Voting Engine",
-    tag: "Quality",
+    name: "DARS",
+    tag: "Resilience",
     description:
-      "Multiple agents debate and vote, converging on the highest-confidence response.",
+      "Detect-and-recover failover across Gemini, DeepSeek, Qwen, Llama and OpenRouter — health-tracked, low-quality-aware, and self-switching mid-job.",
   },
   {
-    name: "Titan Mode",
-    tag: "Max power",
+    name: "Titan",
+    tag: "Architect mode",
     description:
-      "Unleash the full agent fleet for the hardest problems — maximum depth, maximum reliability.",
+      "Think first, build later. A gated nine-phase workflow — discovery, deep analysis, multi-plan, risk review, architecture and an approval gate — before any code is generated.",
     span: true,
   },
 ];

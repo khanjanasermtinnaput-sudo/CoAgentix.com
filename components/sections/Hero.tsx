@@ -9,6 +9,7 @@ import {
   useSpring,
 } from "framer-motion";
 import { EASE } from "@/lib/animations";
+import { CHAT_URL } from "@/lib/site";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -132,7 +133,7 @@ export function Hero() {
             }}
             className="mt-10 flex flex-col gap-3 sm:flex-row"
           >
-            <a href="#start" className="btn-accent px-7 py-3.5 text-base">
+            <a href={CHAT_URL} className="btn-accent px-7 py-3.5 text-base">
               Start Chatting
               <Arrow />
             </a>

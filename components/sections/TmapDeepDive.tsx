@@ -8,24 +8,24 @@ import { EASE } from "@/lib/animations";
 
 const steps = [
   {
-    title: "Task Analysis",
-    body: "TMAP reads intent, complexity, and constraints — classifying the request before a single agent is invoked.",
+    title: "Plan",
+    body: "The Planner agent breaks the task into a concrete, file-by-file build plan — each step naming a path, an action, and its intent.",
   },
   {
-    title: "Agent Selection",
-    body: "Capability vectors are matched by cosine similarity. The best specialists are chosen, not keyword-routed.",
+    title: "Capability scoring",
+    body: "In v2, agents are matched to subtasks by capability vectors and cosine similarity — chosen on fit, never keyword-routed.",
   },
   {
-    title: "Workflow Planning",
-    body: "Subtasks are arranged into an execution DAG with explicit dependencies and a topological order.",
+    title: "Parallel execution",
+    body: "Coder agents implement the plan across an execution DAG — bounded-parallel, with per-node retry, timeout, fallback and replan.",
   },
   {
-    title: "Parallel Execution",
-    body: "Independent nodes run concurrently with per-node retry, timeout, and fallback — failures replan, not crash.",
+    title: "Review & critique",
+    body: "The Reviewer agent attacks the output; Coder revises. The loop repeats until the non-negotiable quality bar is met.",
   },
   {
-    title: "Result Synthesis",
-    body: "Outputs are scored, merged, and synthesized into one coherent, high-confidence response.",
+    title: "Validate & synthesize",
+    body: "Results are validated and merged into one coherent, production-ready set of files — with the full run persisted as a trace.",
   },
 ];
 

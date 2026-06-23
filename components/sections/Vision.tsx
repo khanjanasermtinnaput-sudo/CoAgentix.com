@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { EASE } from "@/lib/animations";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
-const line = "Building the next generation of intelligent AI systems.";
+const line = "Many minds. One intelligence.";
 
 export function Vision() {
   const ref = useRef<HTMLDivElement>(null);
@@ -64,7 +64,7 @@ function Word({
   const start = index / total;
   const end = start + 1 / total;
   const opacity = useTransform(progress, [start, end], [0.15, 1]);
-  const accent = word.toLowerCase().includes("intelligent");
+  const accent = word.toLowerCase().includes("intelligence");
   return (
     <motion.span style={{ opacity }} className="inline-block">
       <span className={accent ? "text-accent" : undefined}>{word}</span>

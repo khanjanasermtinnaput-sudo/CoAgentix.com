@@ -8,36 +8,36 @@ import { slideUp, staggerContainer, viewport } from "@/lib/animations";
 
 const metrics = [
   {
-    label: "Response Speed",
-    value: 0.4,
-    decimals: 1,
-    suffix: "s",
-    bar: 88,
-    note: "Median time-to-first-token in fast mode",
-  },
-  {
-    label: "Routing Accuracy",
-    value: 99.2,
-    decimals: 1,
-    suffix: "%",
-    bar: 99,
-    note: "Correct model + tier selection",
-  },
-  {
-    label: "Multi-Agent Performance",
-    value: 4,
+    label: "Automated Tests Passing",
+    value: 452,
     decimals: 0,
-    suffix: "×",
-    bar: 80,
-    note: "Throughput vs. single-model baseline",
+    suffix: "",
+    bar: 100,
+    note: "Full suite green — 0 failures, 0 flaky tests",
   },
   {
-    label: "Context Utilization",
-    value: 96,
+    label: "Orchestrated Systems",
+    value: 22,
     decimals: 0,
-    suffix: "%",
-    bar: 96,
-    note: "Relevant context retained per task",
+    suffix: "",
+    bar: 100,
+    note: "7 core + 15 enterprise systems working in concert",
+  },
+  {
+    label: "Provider Failover",
+    value: 5,
+    decimals: 0,
+    suffix: "",
+    bar: 100,
+    note: "Gemini · DeepSeek · Qwen · Llama · OpenRouter — auto-switch via DARS",
+  },
+  {
+    label: "Internal Quality Score",
+    value: 7.7,
+    decimals: 1,
+    suffix: "/10",
+    bar: 77,
+    note: "Avg across all V2 orchestration systems",
   },
 ];
 
@@ -51,8 +51,9 @@ export function Benchmarks() {
             Measured where it matters
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-secondary">
-            Performance isn&apos;t a tagline. Co.AI is tuned and tracked across the
-            metrics that define a production-grade AI platform.
+            Performance isn&apos;t a tagline. Every figure below comes straight from
+            the Co.AI codebase and its automated test suite — not aspirational
+            marketing numbers.
           </p>
         </Reveal>
 

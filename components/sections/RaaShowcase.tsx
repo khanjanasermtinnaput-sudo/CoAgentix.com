@@ -6,11 +6,11 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const stages = [
-  { key: "question", label: "Question", detail: "User asks anything" },
-  { key: "search", label: "Search", detail: "Retrieve relevant sources" },
-  { key: "context", label: "Context Gathering", detail: "Rank & assemble evidence" },
-  { key: "reasoning", label: "Reasoning", detail: "Agents reason over context" },
-  { key: "response", label: "Response", detail: "Grounded, cited answer" },
+  { key: "idea", label: "Idea", detail: "You describe what you want to build" },
+  { key: "collaborate", label: "Collaborate", detail: "RAA contributes directions & trade-offs (50/50)" },
+  { key: "clarify", label: "Clarify", detail: "Asks the one most valuable question" },
+  { key: "brief", label: "Brief locked", detail: "Requirement summary becomes the source of truth" },
+  { key: "generate", label: "Generate Code", detail: "Handed to the TMAP build pipeline" },
 ];
 
 export function RaaShowcase() {
@@ -30,12 +30,13 @@ export function RaaShowcase() {
           <Reveal>
             <SectionLabel>RAA system</SectionLabel>
             <h2 className="mt-5 text-display font-semibold text-balance">
-              Retrieval-Augmented Agents
+              Requirements Architect Agent
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-secondary">
-              Co.AI never reasons in a vacuum. Every agent retrieves and grounds
-              itself in real context before forming an answer — eliminating
-              guesswork and hallucination.
+              Co.AI never writes code into a vacuum. The Requirements Architect
+              thinks <em>with</em> you — offering directions and trade-offs, then
+              locking a clear brief before the build pipeline ever starts. A
+              thinking partner, never a questionnaire.
             </p>
             <ul className="mt-8 space-y-3">
               {stages.map((s, i) => (

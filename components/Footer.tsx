@@ -1,11 +1,11 @@
 const columns = [
   {
     title: "Platform",
-    links: ["Co.AI Chat", "Co.AI Code", "API Platform", "TMAP v2"],
+    links: ["Coagentix Chat", "Coagentix Code", "API Platform", "TMAP v2"],
   },
   {
     title: "Technology",
-    links: ["Orchestrator", "RAA System", "Memory", "Voting Engine"],
+    links: ["Orchestrator", "RAA", "Memory", "DARS"],
   },
   {
     title: "Company",

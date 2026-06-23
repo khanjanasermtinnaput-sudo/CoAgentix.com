@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/cn";
+import { CHAT_URL } from "@/lib/site";
 
 const links = [
   { label: "Technology", href: "#technology" },
@@ -53,10 +54,13 @@ export function Navbar() {
         </div>
 
         <div className="hidden items-center gap-3 md:flex">
-          <a href="#products" className="text-sm text-secondary transition-colors hover:text-foreground">
+          <a
+            href={CHAT_URL}
+            className="text-sm text-secondary transition-colors hover:text-foreground"
+          >
             Sign in
           </a>
-          <a href="#start" className="btn-accent text-sm">
+          <a href={CHAT_URL} className="btn-accent text-sm">
             Start Chatting
           </a>
         </div>
@@ -105,7 +109,7 @@ export function Navbar() {
                   {l.label}
                 </a>
               ))}
-              <a href="#start" onClick={() => setOpen(false)} className="btn-accent mt-2">
+              <a href={CHAT_URL} onClick={() => setOpen(false)} className="btn-accent mt-2">
                 Start Chatting
               </a>
             </div>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { EASE } from "@/lib/animations";
+import { CHAT_URL, GITHUB_URL } from "@/lib/site";
 
 export function FinalCta() {
   return (
@@ -29,14 +30,16 @@ export function FinalCta() {
 
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
-                href="#start"
+                href={CHAT_URL}
                 className="btn bg-accent px-7 py-3.5 text-base text-white transition-all hover:-translate-y-0.5 hover:shadow-glow"
               >
                 Start Using Co.AI
                 <Arrow />
               </a>
               <a
-                href="#technology"
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn border border-background/20 bg-transparent px-7 py-3.5 text-base text-background transition-all hover:-translate-y-0.5 hover:border-background/40"
               >
                 View Documentation

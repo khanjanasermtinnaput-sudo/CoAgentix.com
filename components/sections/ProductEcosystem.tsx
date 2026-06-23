@@ -32,14 +32,14 @@ export function ProductEcosystem() {
             <BentoCard className="h-full bg-foreground text-background">
               <div className="flex h-full flex-col justify-between">
                 <div>
-                  <Badge dark>Flagship</Badge>
+                  <Badge dark>Flagship · Mikros 1.0 / Kanon 1.0</Badge>
                   <h3 className="mt-6 text-3xl font-semibold tracking-tight">
-                    Co.AI Chat
+                    Coagentix Chat
                   </h3>
                   <p className="mt-3 max-w-md text-background/60">
-                    Conversational access to the full multi-agent stack. Ask once;
-                    a team of specialists routes, reasons, and synthesizes the
-                    answer.
+                    The general AI assistant. Mikros 1.0 for fast everyday answers,
+                    Kanon 1.0 for balanced, deeper reasoning — backed by DARS
+                    failover so a reply always lands.
                   </p>
                 </div>
                 <ChatMock />
@@ -50,10 +50,11 @@ export function ProductEcosystem() {
           {/* Co.AI Code */}
           <motion.div variants={slideUp}>
             <BentoCard className="h-full">
-              <Badge>Developer</Badge>
-              <h3 className="mt-6 text-2xl font-semibold tracking-tight">Co.AI Code</h3>
+              <Badge>Lite · 1.0 · Pro · Titan</Badge>
+              <h3 className="mt-6 text-2xl font-semibold tracking-tight">Coagentix Code</h3>
               <p className="mt-3 text-sm text-secondary">
-                Agentic coding with checkpoints, build validation, and auto-rollback.
+                Build software conversation-first — from one-shot snippets to
+                Titan&apos;s gated architect workflow.
               </p>
               <CodeMock />
             </BentoCard>
@@ -67,10 +68,13 @@ export function ProductEcosystem() {
                 API Platform
               </h3>
               <p className="mt-3 text-sm text-secondary">
-                Bring orchestration into your own product with a single endpoint.
+                The tmap-v2 engine over streaming SSE endpoints — bring
+                orchestration into your own product.
               </p>
-              <pre className="mt-6 overflow-hidden rounded-xl border border-border bg-[#FAFAFA] p-4 font-mono text-xs text-secondary">
-                <span className="text-accent">POST</span> /v2/run
+              <pre className="mt-6 overflow-hidden rounded-xl border border-border bg-[#FAFAFA] p-4 font-mono text-xs leading-relaxed text-secondary">
+                <span className="text-accent">POST</span> /v1/chat{"\n"}
+                <span className="text-accent">POST</span> /v1/run{"\n"}
+                <span className="text-accent">POST</span> /v1/titan
               </pre>
             </BentoCard>
           </motion.div>
@@ -82,15 +86,15 @@ export function ProductEcosystem() {
                 <div>
                   <Badge>Roadmap</Badge>
                   <h3 className="mt-6 text-2xl font-semibold tracking-tight">
-                    Future Products
+                    What&apos;s next
                   </h3>
                   <p className="mt-3 max-w-md text-sm text-secondary">
-                    Voice agents, autonomous workflows, and enterprise deployment —
-                    built on the same orchestration core.
+                    Projects persistence, live file trees with diff view, one-click
+                    export — and richer memory with embeddings.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {["Voice", "Agents", "Enterprise", "Titan"].map((t) => (
+                  {["Projects", "Live file trees", "Project export", "Memory v2"].map((t) => (
                     <span
                       key={t}
                       className="rounded-full border border-border px-3 py-1 text-xs text-secondary"
@@ -150,7 +154,7 @@ function ChatMock() {
         className="w-fit max-w-[80%] rounded-2xl rounded-bl-sm bg-background px-4 py-2.5 text-sm text-foreground"
       >
         <span className="mr-2 inline-block h-2 w-2 rounded-full bg-accent align-middle" />
-        Routing to 3 agents · grounding via RAA…
+        Kanon 1.0 · DARS routing across providers…
       </motion.div>
     </div>
   );
