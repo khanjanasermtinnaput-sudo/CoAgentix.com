@@ -10,11 +10,12 @@ import {
 } from "framer-motion";
 import { EASE } from "@/lib/animations";
 import { CHAT_URL } from "@/lib/site";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const { t } = useLanguage();
 
-  // Scroll-based motion
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -23,7 +24,6 @@ export function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
-  // Mouse parallax
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const px = useSpring(mx, { stiffness: 60, damping: 20 });
@@ -48,7 +48,6 @@ export function Hero() {
       onMouseMove={handleMouse}
       className="relative flex min-h-[100svh] items-center overflow-hidden"
     >
-      {/* Animated background */}
       <motion.div
         style={{ y: bgY }}
         className="pointer-events-none absolute inset-0 -z-10"
@@ -56,7 +55,6 @@ export function Hero() {
       >
         <div className="absolute inset-0 grid-bg opacity-[0.6]" />
 
-        {/* Floating abstract shapes */}
         <motion.div
           style={{ x: shape1X, y: shape1Y }}
           className="absolute -left-20 top-24 h-[28rem] w-[28rem] rounded-full bg-accent/20 blur-[120px] animate-float-slow"
@@ -70,7 +68,6 @@ export function Hero() {
           className="absolute bottom-[-4rem] left-1/3 h-[20rem] w-[20rem] rounded-full bg-accent/10 blur-[110px] animate-float-slow"
         />
 
-        {/* Orbiting ring accent */}
         <motion.div
           style={{ x: shape3X, y: shape3Y }}
           className="absolute right-[12%] top-[22%] hidden lg:block"
@@ -106,13 +103,13 @@ export function Hero() {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-4 py-1.5 text-xs font-medium text-secondary backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              Introducing Co.AI — multi-agent orchestration
+              {t.hero.badge}
             </span>
           </motion.div>
 
           <h1 className="mt-7 text-hero font-semibold text-balance">
-            <TextReveal text="AI That Thinks" />
-            <TextReveal text="Beyond One Model" accent />
+            <TextReveal text={t.hero.line1} />
+            <TextReveal text={t.hero.line2} accent />
           </h1>
 
           <motion.p
@@ -122,8 +119,7 @@ export function Hero() {
             }}
             className="mt-7 max-w-2xl text-lg leading-relaxed text-secondary md:text-xl"
           >
-            Co.AI combines multiple AI systems, intelligent routing, memory, and
-            orchestration into one powerful platform.
+            {t.hero.description}
           </motion.p>
 
           <motion.div
@@ -134,11 +130,11 @@ export function Hero() {
             className="mt-10 flex flex-col gap-3 sm:flex-row"
           >
             <a href={CHAT_URL} className="btn-accent px-7 py-3.5 text-base">
-              Start Chatting
+              {t.hero.cta}
               <Arrow />
             </a>
             <a href="#technology" className="btn-ghost px-7 py-3.5 text-base">
-              Explore Technology
+              {t.hero.explore}
             </a>
           </motion.div>
 
@@ -149,17 +145,16 @@ export function Hero() {
             }}
             className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-secondary"
           >
-            <span>Trusted orchestration for</span>
-            {["Routing", "Memory", "Multi-Agent", "RAA", "Titan Mode"].map((t) => (
-              <span key={t} className="font-medium text-foreground/70">
-                {t}
+            <span>{t.hero.trustedFor}</span>
+            {t.hero.trustedItems.map((item) => (
+              <span key={item} className="font-medium text-foreground/70">
+                {item}
               </span>
             ))}
           </motion.div>
         </motion.div>
       </motion.div>
 
-      {/* Scroll cue */}
       <motion.div
         style={{ opacity: contentOpacity }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"

@@ -4,39 +4,32 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-
-const stages = [
-  { key: "idea", label: "Idea", detail: "You describe what you want to build" },
-  { key: "collaborate", label: "Collaborate", detail: "RAA contributes directions & trade-offs (50/50)" },
-  { key: "clarify", label: "Clarify", detail: "Asks the one most valuable question" },
-  { key: "brief", label: "Brief locked", detail: "Requirement summary becomes the source of truth" },
-  { key: "generate", label: "Generate Code", detail: "Handed to the TMAP build pipeline" },
-];
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function RaaShowcase() {
   const [active, setActive] = useState(0);
+  const { t } = useLanguage();
+  const stages = t.raa.stages;
 
   useEffect(() => {
+    setActive(0);
     const id = setInterval(() => {
       setActive((a) => (a + 1) % stages.length);
     }, 1800);
     return () => clearInterval(id);
-  }, []);
+  }, [stages.length]);
 
   return (
     <section className="border-t border-border py-section">
       <div className="container-px">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <Reveal>
-            <SectionLabel>RAA system</SectionLabel>
+            <SectionLabel>{t.raa.label}</SectionLabel>
             <h2 className="mt-5 text-display font-semibold text-balance">
-              Requirements Architect Agent
+              {t.raa.title}
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-secondary">
-              Co.AI never writes code into a vacuum. The Requirements Architect
-              thinks <em>with</em> you — offering directions and trade-offs, then
-              locking a clear brief before the build pipeline ever starts. A
-              thinking partner, never a questionnaire.
+              {t.raa.description}
             </p>
             <ul className="mt-8 space-y-3">
               {stages.map((s, i) => (
@@ -112,9 +105,6 @@ export function RaaShowcase() {
                   );
                 })}
               </div>
-
-              {/* flow connector pulse */}
-              <div className="pointer-events-none absolute inset-x-8 top-0 -z-0" />
             </div>
           </Reveal>
         </div>

@@ -4,19 +4,22 @@ import { motion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { slideUp, staggerContainer, viewport } from "@/lib/animations";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function ProductEcosystem() {
+  const { t } = useLanguage();
+  const p = t.products;
+
   return (
     <section id="products" className="border-t border-border py-section">
       <div className="container-px">
         <Reveal className="max-w-2xl">
-          <SectionLabel>Product ecosystem</SectionLabel>
+          <SectionLabel>{p.label}</SectionLabel>
           <h2 className="mt-5 text-display font-semibold text-balance">
-            One intelligence, many surfaces
+            {p.title}
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-secondary">
-            The same orchestration engine powers every Co.AI product — from chat
-            to code to raw API access.
+            {p.description}
           </p>
         </Reveal>
 
@@ -27,34 +30,31 @@ export function ProductEcosystem() {
           viewport={viewport}
           className="mt-14 grid auto-rows-[minmax(0,1fr)] gap-4 md:grid-cols-3"
         >
-          {/* Co.AI Chat — large feature tile */}
+          {/* Coagentix Chat */}
           <motion.div variants={slideUp} className="md:col-span-2 md:row-span-2">
             <BentoCard className="h-full bg-foreground text-background">
               <div className="flex h-full flex-col justify-between">
                 <div>
-                  <Badge dark>Flagship · Mikros 1.0 / Kanon 1.0</Badge>
+                  <Badge dark>{p.chat.badge}</Badge>
                   <h3 className="mt-6 text-3xl font-semibold tracking-tight">
-                    Coagentix Chat
+                    {p.chat.name}
                   </h3>
                   <p className="mt-3 max-w-md text-background/60">
-                    The general AI assistant. Mikros 1.0 for fast everyday answers,
-                    Kanon 1.0 for balanced, deeper reasoning — backed by DARS
-                    failover so a reply always lands.
+                    {p.chat.description}
                   </p>
                 </div>
-                <ChatMock />
+                <ChatMock mock={p.chat.mock} mockReply={p.chat.mockReply} />
               </div>
             </BentoCard>
           </motion.div>
 
-          {/* Co.AI Code */}
+          {/* Coagentix Code */}
           <motion.div variants={slideUp}>
             <BentoCard className="h-full">
-              <Badge>Lite · 1.0 · Pro · Titan</Badge>
-              <h3 className="mt-6 text-2xl font-semibold tracking-tight">Coagentix Code</h3>
+              <Badge>{p.code.badge}</Badge>
+              <h3 className="mt-6 text-2xl font-semibold tracking-tight">{p.code.name}</h3>
               <p className="mt-3 text-sm text-secondary">
-                Build software conversation-first — from one-shot snippets to
-                Titan&apos;s gated architect workflow.
+                {p.code.description}
               </p>
               <CodeMock />
             </BentoCard>
@@ -63,13 +63,12 @@ export function ProductEcosystem() {
           {/* API Platform */}
           <motion.div variants={slideUp}>
             <BentoCard className="h-full">
-              <Badge>Build</Badge>
+              <Badge>{p.api.badge}</Badge>
               <h3 className="mt-6 text-2xl font-semibold tracking-tight">
-                API Platform
+                {p.api.name}
               </h3>
               <p className="mt-3 text-sm text-secondary">
-                The tmap-v2 engine over streaming SSE endpoints — bring
-                orchestration into your own product.
+                {p.api.description}
               </p>
               <pre className="mt-6 overflow-hidden rounded-xl border border-border bg-[#FAFAFA] p-4 font-mono text-xs leading-relaxed text-secondary">
                 <span className="text-accent">POST</span> /v1/chat{"\n"}
@@ -79,27 +78,26 @@ export function ProductEcosystem() {
             </BentoCard>
           </motion.div>
 
-          {/* Future products */}
+          {/* Roadmap */}
           <motion.div variants={slideUp} className="md:col-span-2">
             <BentoCard className="h-full">
               <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
                 <div>
-                  <Badge>Roadmap</Badge>
+                  <Badge>{p.roadmap.badge}</Badge>
                   <h3 className="mt-6 text-2xl font-semibold tracking-tight">
-                    What&apos;s next
+                    {p.roadmap.name}
                   </h3>
                   <p className="mt-3 max-w-md text-sm text-secondary">
-                    Projects persistence, live file trees with diff view, one-click
-                    export — and richer memory with embeddings.
+                    {p.roadmap.description}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {["Projects", "Live file trees", "Project export", "Memory v2"].map((t) => (
+                  {p.roadmap.tags.map((tag) => (
                     <span
-                      key={t}
+                      key={tag}
                       className="rounded-full border border-border px-3 py-1 text-xs text-secondary"
                     >
-                      {t}
+                      {tag}
                     </span>
                   ))}
                 </div>
@@ -140,11 +138,11 @@ function Badge({ children, dark }: { children: React.ReactNode; dark?: boolean }
   );
 }
 
-function ChatMock() {
+function ChatMock({ mock, mockReply }: { mock: string; mockReply: string }) {
   return (
     <div className="mt-8 space-y-3">
       <div className="ml-auto w-fit max-w-[70%] rounded-2xl rounded-br-sm bg-background/10 px-4 py-2.5 text-sm">
-        Summarize this quarter and draft the follow-up.
+        {mock}
       </div>
       <motion.div
         initial={{ opacity: 0, y: 8 }}
@@ -154,7 +152,7 @@ function ChatMock() {
         className="w-fit max-w-[80%] rounded-2xl rounded-bl-sm bg-background px-4 py-2.5 text-sm text-foreground"
       >
         <span className="mr-2 inline-block h-2 w-2 rounded-full bg-accent align-middle" />
-        Kanon 1.0 · DARS routing across providers…
+        {mockReply}
       </motion.div>
     </div>
   );

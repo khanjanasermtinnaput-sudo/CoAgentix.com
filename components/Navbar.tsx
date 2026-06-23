@@ -4,17 +4,19 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/cn";
 import { CHAT_URL } from "@/lib/site";
-
-const links = [
-  { label: "Technology", href: "#technology" },
-  { label: "Architecture", href: "#architecture" },
-  { label: "Benchmarks", href: "#benchmarks" },
-  { label: "Products", href: "#products" },
-];
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { lang, toggle, t } = useLanguage();
+
+  const links = [
+    { label: t.nav.technology, href: "#technology" },
+    { label: t.nav.architecture, href: "#architecture" },
+    { label: t.nav.benchmarks, href: "#benchmarks" },
+    { label: t.nav.products, href: "#products" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -54,39 +56,65 @@ export function Navbar() {
         </div>
 
         <div className="hidden items-center gap-3 md:flex">
+          {/* Language toggle */}
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label="Toggle language"
+            className="flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-secondary transition-colors hover:border-foreground/30 hover:text-foreground"
+          >
+            <span className={lang === "en" ? "text-foreground font-semibold" : "text-secondary"}>EN</span>
+            <span className="text-border">/</span>
+            <span className={lang === "th" ? "text-foreground font-semibold" : "text-secondary"}>TH</span>
+          </button>
+
           <a
             href={CHAT_URL}
             className="text-sm text-secondary transition-colors hover:text-foreground"
           >
-            Sign in
+            {t.nav.signIn}
           </a>
           <a href={CHAT_URL} className="btn-accent text-sm">
-            Start Chatting
+            {t.nav.startChatting}
           </a>
         </div>
 
-        <button
-          type="button"
-          aria-label="Toggle menu"
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-border md:hidden"
-        >
-          <span className="relative block h-3 w-4">
-            <span
-              className={cn(
-                "absolute left-0 top-0 h-0.5 w-4 bg-foreground transition-transform duration-300",
-                open && "translate-y-[5px] rotate-45"
-              )}
-            />
-            <span
-              className={cn(
-                "absolute bottom-0 left-0 h-0.5 w-4 bg-foreground transition-transform duration-300",
-                open && "-translate-y-[5px] -rotate-45"
-              )}
-            />
-          </span>
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          {/* Language toggle (mobile) */}
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label="Toggle language"
+            className="flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-xs font-medium text-secondary"
+          >
+            <span className={lang === "en" ? "text-foreground font-semibold" : "text-secondary"}>EN</span>
+            <span className="text-border">/</span>
+            <span className={lang === "th" ? "text-foreground font-semibold" : "text-secondary"}>TH</span>
+          </button>
+
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border"
+          >
+            <span className="relative block h-3 w-4">
+              <span
+                className={cn(
+                  "absolute left-0 top-0 h-0.5 w-4 bg-foreground transition-transform duration-300",
+                  open && "translate-y-[5px] rotate-45"
+                )}
+              />
+              <span
+                className={cn(
+                  "absolute bottom-0 left-0 h-0.5 w-4 bg-foreground transition-transform duration-300",
+                  open && "-translate-y-[5px] -rotate-45"
+                )}
+              />
+            </span>
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>
@@ -110,7 +138,7 @@ export function Navbar() {
                 </a>
               ))}
               <a href={CHAT_URL} onClick={() => setOpen(false)} className="btn-accent mt-2">
-                Start Chatting
+                {t.nav.startChatting}
               </a>
             </div>
           </motion.div>

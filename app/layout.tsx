@@ -6,6 +6,7 @@ import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { LanguageProvider } from "@/lib/LanguageContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -68,17 +69,19 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <SmoothScroll>
-          <a
-            href="#main"
-            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:text-background"
-          >
-            Skip to content
-          </a>
-          <Navbar />
-          <main id="main">{children}</main>
-          <Footer />
-        </SmoothScroll>
+        <LanguageProvider>
+          <SmoothScroll>
+            <a
+              href="#main"
+              className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:text-background"
+            >
+              Skip to content
+            </a>
+            <Navbar />
+            <main id="main">{children}</main>
+            <Footer />
+          </SmoothScroll>
+        </LanguageProvider>
       </body>
     </html>
   );

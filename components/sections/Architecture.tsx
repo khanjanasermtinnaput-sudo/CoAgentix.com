@@ -5,19 +5,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { EASE } from "@/lib/animations";
-
-const nodes = [
-  { label: "User", sub: "Intent & prompt" },
-  { label: "Orchestrator", sub: "Mode (fast / balanced / deep) + cost optimizer" },
-  { label: "RAA", sub: "Requirements gathered & brief locked" },
-  { label: "TMAP v2", sub: "Planner → Coder → Reviewer" },
-  { label: "DARS", sub: "Provider failover & health routing" },
-  { label: "Memory", sub: "Cross-session recall (Supabase)" },
-  { label: "Final Response", sub: "Synthesized, reviewed output", accent: true },
-];
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function Architecture() {
   const ref = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 0.8", "end 0.5"],
@@ -28,25 +20,22 @@ export function Architecture() {
     <section id="architecture" className="border-t border-border py-section">
       <div className="container-px">
         <Reveal className="max-w-2xl">
-          <SectionLabel>Architecture</SectionLabel>
+          <SectionLabel>{t.architecture.label}</SectionLabel>
           <h2 className="mt-5 text-display font-semibold text-balance">
-            One request, a full pipeline of intelligence
+            {t.architecture.title}
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-secondary">
-            Watch a single prompt flow through the entire Co.AI stack — routed,
-            decomposed, executed in parallel, voted on, grounded, and remembered.
+            {t.architecture.description}
           </p>
         </Reveal>
 
         <div ref={ref} className="relative mt-16">
-          {/* Animated connecting line (desktop center spine) */}
           <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-border md:block">
             <motion.div
               style={{ scaleY: lineLength }}
               className="h-full w-full origin-top bg-accent"
             />
           </div>
-          {/* Mobile left spine */}
           <div className="pointer-events-none absolute left-5 top-0 h-full w-px bg-border md:hidden">
             <motion.div
               style={{ scaleY: lineLength }}
@@ -55,8 +44,8 @@ export function Architecture() {
           </div>
 
           <ul className="space-y-4 md:space-y-0">
-            {nodes.map((node, i) => (
-              <ArchNode key={node.label} node={node} index={i} total={nodes.length} />
+            {t.architecture.nodes.map((node, i) => (
+              <ArchNode key={node.label} node={node} index={i} total={t.architecture.nodes.length} />
             ))}
           </ul>
         </div>
@@ -69,7 +58,7 @@ function ArchNode({
   node,
   index,
 }: {
-  node: (typeof nodes)[number];
+  node: { label: string; sub: string; accent?: boolean };
   index: number;
   total: number;
 }) {
@@ -82,7 +71,6 @@ function ArchNode({
       transition={{ duration: 0.6, ease: EASE }}
       className="relative md:grid md:min-h-[112px] md:grid-cols-2 md:items-center md:gap-8"
     >
-      {/* Node dot on the spine */}
       <span className="absolute left-5 top-6 z-10 -translate-x-1/2 md:left-1/2 md:top-1/2 md:-translate-y-1/2">
         <span
           className={`block h-3.5 w-3.5 rounded-full border-2 ${

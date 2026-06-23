@@ -1,23 +1,11 @@
-const columns = [
-  {
-    title: "Platform",
-    links: ["Coagentix Chat", "Coagentix Code", "API Platform", "TMAP v2"],
-  },
-  {
-    title: "Technology",
-    links: ["Orchestrator", "RAA", "Memory", "DARS"],
-  },
-  {
-    title: "Company",
-    links: ["Vision", "Careers", "Blog", "Contact"],
-  },
-  {
-    title: "Resources",
-    links: ["Documentation", "Changelog", "Status", "Security"],
-  },
-];
+"use client";
+
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function Footer() {
+  const { t } = useLanguage();
+  const f = t.footer;
+
   return (
     <footer className="border-t border-border bg-background">
       <div className="container-px py-16">
@@ -33,12 +21,11 @@ export function Footer() {
               <span className="text-base font-semibold tracking-tight">Co.AI</span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-secondary">
-              Many minds, one intelligence. Building the next generation of
-              orchestrated AI systems.
+              {f.tagline}
             </p>
           </div>
 
-          {columns.map((col) => (
+          {f.columns.map((col) => (
             <div key={col.title}>
               <h3 className="text-sm font-semibold">{col.title}</h3>
               <ul className="mt-4 space-y-3">
@@ -58,17 +45,13 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-border pt-8 text-sm text-secondary md:flex-row md:items-center">
-          <p>© {new Date().getFullYear()} Co.AI · CoAgentix. All rights reserved.</p>
+          <p>{f.copyright}</p>
           <div className="flex items-center gap-6">
-            <a href="#" className="transition-colors hover:text-foreground">
-              Privacy
-            </a>
-            <a href="#" className="transition-colors hover:text-foreground">
-              Terms
-            </a>
-            <a href="#" className="transition-colors hover:text-foreground">
-              Security
-            </a>
+            {f.legal.map((item) => (
+              <a key={item} href="#" className="transition-colors hover:text-foreground">
+                {item}
+              </a>
+            ))}
           </div>
         </div>
       </div>

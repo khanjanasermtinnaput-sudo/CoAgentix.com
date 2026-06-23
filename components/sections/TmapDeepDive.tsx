@@ -5,32 +5,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { EASE } from "@/lib/animations";
-
-const steps = [
-  {
-    title: "Plan",
-    body: "The Planner agent breaks the task into a concrete, file-by-file build plan — each step naming a path, an action, and its intent.",
-  },
-  {
-    title: "Capability scoring",
-    body: "In v2, agents are matched to subtasks by capability vectors and cosine similarity — chosen on fit, never keyword-routed.",
-  },
-  {
-    title: "Parallel execution",
-    body: "Coder agents implement the plan across an execution DAG — bounded-parallel, with per-node retry, timeout, fallback and replan.",
-  },
-  {
-    title: "Review & critique",
-    body: "The Reviewer agent attacks the output; Coder revises. The loop repeats until the non-negotiable quality bar is met.",
-  },
-  {
-    title: "Validate & synthesize",
-    body: "Results are validated and merged into one coherent, production-ready set of files — with the full run persisted as a trace.",
-  },
-];
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function TmapDeepDive() {
   const ref = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 0.7", "end 0.6"],
@@ -42,19 +21,17 @@ export function TmapDeepDive() {
       <div className="container-px">
         <Reveal className="max-w-2xl">
           <SectionLabel className="text-background/60">
-            <span className="text-background/80">TMAP deep dive</span>
+            <span className="text-background/80">{t.tmap.label}</span>
           </SectionLabel>
           <h2 className="mt-5 text-display font-semibold text-balance">
-            How a thought becomes a plan
+            {t.tmap.title}
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-background/60">
-            TMAP v2 is the planning brain of Co.AI — turning an open-ended prompt
-            into a precise, parallelizable execution graph.
+            {t.tmap.description}
           </p>
         </Reveal>
 
         <div ref={ref} className="relative mt-16 pl-8 md:pl-0">
-          {/* Timeline rail */}
           <div className="absolute left-[7px] top-2 h-[calc(100%-1rem)] w-px bg-background/15 md:left-1/2 md:-translate-x-1/2">
             <motion.div
               style={{ scaleY: progress }}
@@ -63,7 +40,7 @@ export function TmapDeepDive() {
           </div>
 
           <ol className="space-y-12 md:space-y-0">
-            {steps.map((step, i) => (
+            {t.tmap.steps.map((step, i) => (
               <TimelineStep key={step.title} step={step} index={i} />
             ))}
           </ol>
@@ -77,7 +54,7 @@ function TimelineStep({
   step,
   index,
 }: {
-  step: (typeof steps)[number];
+  step: { title: string; body: string };
   index: number;
 }) {
   const left = index % 2 === 0;

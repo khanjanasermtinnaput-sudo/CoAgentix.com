@@ -4,74 +4,23 @@ import { motion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { slideUp, staggerContainer, viewport } from "@/lib/animations";
+import { useLanguage } from "@/lib/LanguageContext";
 
-type Tech = {
-  name: string;
-  tag: string;
-  description: string;
-  span?: boolean;
-};
-
-const technologies: Tech[] = [
-  {
-    name: "TMAP v2",
-    tag: "Core engine",
-    description:
-      "The multi-agent build engine. A Planner breaks the task into a plan, Coder agents implement it, and a Reviewer critiques — looping until the output meets the quality bar.",
-    span: true,
-  },
-  {
-    name: "RAA",
-    tag: "Requirements",
-    description:
-      "The Requirements Architect Agent thinks WITH you — contributing ideas and trade-offs, then locking a clear brief before a single line of code is written.",
-  },
-  {
-    name: "Orchestrator",
-    tag: "Engine",
-    description:
-      "Fast / balanced / deep modes with a built-in cost optimizer routing each task to the right depth and model tier.",
-  },
-  {
-    name: "Memory System",
-    tag: "Context",
-    description:
-      "Cross-session memory persisted in Supabase keeps Titan and TMAP grounded in everything that came before.",
-  },
-  {
-    name: "Multi-Agent Workflow",
-    tag: "Parallel",
-    description:
-      "Bounded-parallel execution with per-node retry, timeout, fallback, and re-run-from-failure.",
-  },
-  {
-    name: "DARS",
-    tag: "Resilience",
-    description:
-      "Detect-and-recover failover across Gemini, DeepSeek, Qwen, Llama and OpenRouter — health-tracked, low-quality-aware, and self-switching mid-job.",
-  },
-  {
-    name: "Titan",
-    tag: "Architect mode",
-    description:
-      "Think first, build later. A gated nine-phase workflow — discovery, deep analysis, multi-plan, risk review, architecture and an approval gate — before any code is generated.",
-    span: true,
-  },
-];
+const spans = [true, false, false, false, false, false, true];
 
 export function TechnologyShowcase() {
+  const { t } = useLanguage();
+
   return (
     <section id="technology" className="border-t border-border py-section">
       <div className="container-px">
         <Reveal className="max-w-2xl">
-          <SectionLabel>Core technology</SectionLabel>
+          <SectionLabel>{t.technology.label}</SectionLabel>
           <h2 className="mt-5 text-display font-semibold text-balance">
-            Seven systems, one intelligence
+            {t.technology.title}
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-secondary">
-            Every Co.AI response is the product of specialized systems working in
-            concert — each engineered for a distinct part of the reasoning
-            pipeline.
+            {t.technology.description}
           </p>
         </Reveal>
 
@@ -82,11 +31,11 @@ export function TechnologyShowcase() {
           viewport={viewport}
           className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {technologies.map((tech) => (
+          {t.technology.items.map((tech, i) => (
             <motion.li
               key={tech.name}
               variants={slideUp}
-              className={tech.span ? "lg:col-span-2" : ""}
+              className={spans[i] ? "lg:col-span-2" : ""}
             >
               <TechCard tech={tech} />
             </motion.li>
@@ -97,10 +46,9 @@ export function TechnologyShowcase() {
   );
 }
 
-function TechCard({ tech }: { tech: Tech }) {
+function TechCard({ tech }: { tech: { name: string; tag: string; description: string } }) {
   return (
     <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-background p-7 shadow-card transition-all duration-500 ease-smooth hover:-translate-y-1 hover:shadow-card-hover">
-      {/* hover glow */}
       <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-accent/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
       <div className="flex items-center justify-between">
